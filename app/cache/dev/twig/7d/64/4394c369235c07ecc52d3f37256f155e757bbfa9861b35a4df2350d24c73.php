@@ -29,7 +29,7 @@ class __TwigTemplate_7d644394c369235c07ecc52d3f37256f155e757bbfa9861b35a4df2350d
     {
         // line 3
         echo "    <div class=\"page-header\" style = \"width: 400px\">
-        <h1>Edit Account</h1>
+        <h1>Change Password</h1>
     </div>
 
     ";
@@ -56,7 +56,7 @@ class __TwigTemplate_7d644394c369235c07ecc52d3f37256f155e757bbfa9861b35a4df2350d
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['flashMessage'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 15
-        echo "\t\t\t
+        echo "
 \t\t\t";
         // line 16
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "password"), 'label');
@@ -71,7 +71,7 @@ class __TwigTemplate_7d644394c369235c07ecc52d3f37256f155e757bbfa9861b35a4df2350d
         echo " 
 \t\t    ";
         // line 19
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "newPassword"), "NewPassword"), 'widget');
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "newPassword"), "NewPassword"), 'widget', array("attr" => array("class" => "form-control")));
         echo "
 \t\t    ";
         // line 20
@@ -79,7 +79,7 @@ class __TwigTemplate_7d644394c369235c07ecc52d3f37256f155e757bbfa9861b35a4df2350d
         echo " 
 \t\t    ";
         // line 21
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "newPassword"), "ConfirmPassword"), 'widget');
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "newPassword"), "ConfirmPassword"), 'widget', array("attr" => array("class" => "form-control")));
         echo "
 
 \t\t    <div style = \"margin-top: 4px; width: 300px;\">

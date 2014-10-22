@@ -64,7 +64,7 @@ class EditController extends Controller
 		$changePasswordForm = $this->createFormBuilder($user)
 			->add('password','password', array('attr' => array('class' => 'form-control')))
 			->add('newPassword', 'repeated', array('first_name' => 'NewPassword', 'second_name' => 'ConfirmPassword', 'type' => 'password', 'mapped' => false))
-			->add('save', 'submit', array('label' => 'Change Password'))
+			->add('save', 'submit', array('label' => 'Change Password', 'attr' => array('class' => 'btn btn-lg btn-primary btn-block')))
 			->getForm();
 
 		if ($request->getMethod() == 'POST') {
@@ -75,7 +75,6 @@ class EditController extends Controller
 				$password = $changePasswordForm["password"]->getData();
 				$encoder = $this->container->get('security.encoder_factory')->getEncoder($user);
 				$password = $encoder->encodePassword($password, $user->getSalt());
-
 				$newpassword = $changePasswordForm["newPassword"]->getData();
 				$encoder = $this->container->get('security.encoder_factory')->getEncoder($user);
 				$user->setPassword($encoder->encodePassword($newpassword, $user->getSalt()));

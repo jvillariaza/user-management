@@ -135,11 +135,6 @@ class appTestUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
 
         }
 
-        // index
-        if (0 === strpos($pathinfo, '/hello') && preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'index')), array (  '_controller' => 'Users\\ManagementBundle\\Controller\\DefaultController::indexAction',));
-        }
-
         // dashboard
         if ($pathinfo === '/dashboard') {
             return array (  '_controller' => 'Users\\ManagementBundle\\Controller\\DefaultController::indexAction',  '_route' => 'dashboard',);
