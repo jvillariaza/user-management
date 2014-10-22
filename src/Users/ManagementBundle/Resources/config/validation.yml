@@ -1,0 +1,16 @@
+Users\ManagementBundle\Entity\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
+    properties:
+        firstName:
+            - NotBlank: ~
+        lastName:
+            - NotBlank: ~
+        email:
+            - NotBlank: ~
+            - Email: ~
+        password:
+            - NotBlank: ~
+            - Length:
+                min: 6
+                minMessage: Your password is too short. It should contain {{ limit }} characters or more.

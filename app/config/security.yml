@@ -1,0 +1,52 @@
+security:
+    encoders:
+        Users\ManagementBundle\Entity\User:
+            id: sha256salted_encoder
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        main:
+            entity: {class: Users\ManagementBundle\Entity\User, property:email}
+        in_memory:
+            memory:
+                users:
+                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        login:
+            pattern:  ^/login$
+            security: false
+
+        logout:
+            pattern:  ^/logout$
+            security: false
+
+        secured_area:
+            pattern:    ^/dashboard
+            provider: main
+            form_login:
+                always_use_default_target_path: true
+                default_target_path: /dashboard
+                use_referer: true
+                failure_path: user_login
+                check_path: login_check
+                login_path: user_login
+            logout:
+                path:   user_logout
+                target: user_login
+                invalidate_session: false
+            #anonymous: ~
+            #http_basic:
+            #    realm: "Secured Demo Area"
+
+    access_control:
+        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/dashboard, roles: ROLE_USER }

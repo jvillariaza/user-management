@@ -1,0 +1,38 @@
+{% extends 'UsersManagementBundle::layout.html.twig' %}
+{% block body %}
+    <div class="page-header" style = "width: 400px">
+        <h1>User Login</h1>
+    </div>
+
+    
+
+	<form action="{{ path('login_check') }}" method="post">
+		<div style = "width: 300px; margin-left: 30px">
+
+			{% for flashMessage in app.session.flashbag.get('alert-success') %}
+				<div class="alert alert-success" role="alert">
+					{{ flashMessage }}
+				</div> 
+			{% endfor %}
+
+			{% if error %}
+		    	<div class="alert alert-danger" role="alert">{{ error.message }}</div>
+			{% endif %}
+
+		    <label for="username">Username:</label>
+		    <input class = "form-control" type="text" id="username" name="_username" value="{{ last_username }}" />
+
+		    <label for="password">Password:</label>
+		    <input class = "form-control" type="password" id="password" name="_password" />
+
+		    <div style = "margin-top: 4px; width: 300px;">
+		    	<button type="submit" class = "btn btn-lg btn-primary btn-block">Login</button>
+		    </div>
+	    </div>
+	</form>
+
+    <p class="space">
+    	<a href="{{ path('account_register') }}"><span class="login-link f-left">New here? Sign Up Now!</span></a> &nbsp;  &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+	    <a href="{{ path('forgot_password') }}"><span class="back">Forgot Password</span></a>
+	</p>
+{% endblock %}

@@ -1,0 +1,11 @@
+parameters:
+#    users_management.example.class: Users\ManagementBundle\Example
+
+#services:
+#    users_management.example:
+#        class: %users_management.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+services:
+    sha256salted_encoder:
+        class: Users\ManagementBundle\Helper\Sha256SaltedHelper
+

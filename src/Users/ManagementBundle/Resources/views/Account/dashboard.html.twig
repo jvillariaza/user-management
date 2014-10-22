@@ -1,0 +1,10 @@
+{% extends 'UsersManagementBundle::layout.html.twig' %}
+{% block body %}
+    <div class="page-header" style = "width: 700px">
+        <span style = "font-size: 24pt">Welcome Back, {{ user.firstName }}</span> &nbsp; | &nbsp; <small>({{ user.email }})</small>  &nbsp; | &nbsp; <a href = '{{ path('user_logout') }}'>Logout</a>
+    </div>
+	<div>
+		<a href = '{{ path('edit_account', {'id' : user.id|default(1)}) }}'>Edit Account</a> &nbsp; | &nbsp; <a href = '{{ path('change_password', {'id' : user.id|default('1')}) }}'>Change Password</a>
+	</div>
+
+{% endblock %}

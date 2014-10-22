@@ -1,0 +1,41 @@
+dashboard:
+    pattern:  /dashboard
+    defaults: { _controller: UsersManagementBundle:Default:index }
+
+account_register:
+    path:     /register
+    defaults: { _controller: UsersManagementBundle:Registration:register }
+
+register_user:
+    path:     /register/create
+    defaults: { _controller: UsersManagementBundle:Registration:create }
+
+confirm_user_registration:
+    path: 	  /confirmEmail/{id}
+    defaults: { _controller: UsersManagementBundle:Registration:confirmEmail}
+
+user_login:
+    path: /login
+    defaults: { _controller: UsersManagementBundle:Login:doLogin }
+
+login_check:
+    path: /dashboard/login_check
+
+user_logout:
+   path: /dashboard/logout
+
+edit_account:
+   path: /editAccount/{id}
+   defaults: { _controller: UsersManagementBundle:Edit:editAccount }
+
+change_password:
+    path: /changePassword/{id}
+    defaults: { _controller: UsersManagementBundle:Edit:changePassword }
+
+forgot_password:
+    path: /forgotPassword
+    defaults: { _controller: UsersManagementBundle:Login:forgotPassword }
+
+forgot_password_check:
+    path: /forgotPasswordCheck/{id}
+    defaults: { _controller: UsersManagementBundle:Login:forgotPasswordCheck }

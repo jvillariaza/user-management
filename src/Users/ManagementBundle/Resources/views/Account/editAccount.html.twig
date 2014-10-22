@@ -1,0 +1,32 @@
+{% extends 'UsersManagementBundle::layout.html.twig' %}
+{% block body %}
+    <div class="page-header" style = "width: 400px">
+        <h1>Edit Account</h1>
+    </div>
+
+    {{ form_start(form) }}
+		<div style = "width: 300px; margin-left: 30px">
+
+			{% for flashMessage in app.session.flashbag.get('alert-success') %}
+				<div class="alert alert-success" role="alert">
+					{{ flashMessage }}
+				</div> 
+			{% endfor %}
+
+			<label for="email">Email:</label>
+			<input type = 'text' disabled class = "form-control" value = '{{ email }}' />
+			{{ form_label(form.firstName) }} 
+		    {{ form_widget(form.firstName) }}
+		    {{ form_label(form.lastName) }} 
+		    {{ form_widget(form.lastName) }}
+
+		    <div style = "margin-top: 4px; width: 300px;">
+		        {{ form_widget(form.save) }}
+		    </div>
+		</div>
+	{{ form_end(form) }}
+	<p class="space">
+	    <a href="{{ path('dashboard') }}"><span class="back">&laquo; Back to dashboard</span></a>
+	</p>
+
+{% endblock %}
