@@ -10,6 +10,8 @@ use Symfony\Component\Validator\Constraints\Length;
 
 use Users\ManagementBundle\Entity\User;
 use Users\ManagementBundle\Entity\ChangePasswordRequests;
+use Users\ManagementBundle\Form\ForgotPasswordType;
+use Users\ManagementBundle\Form\PasswordType;
 
 class LoginController extends Controller
 {
@@ -47,10 +49,7 @@ class LoginController extends Controller
         $em = $this->getDoctrine()->getManager();
         $ChangePasswordRequests = new ChangePasswordRequests();
 
-        $forgotPasswordForm = $this->createFormBuilder($ChangePasswordRequests)
-            ->add('email', 'text', array('label' => 'Email Address: ', 'attr' => array('class' => 'form-control')))
-            ->add('save', 'submit', array('label' => 'Forgot Password', 'attr' => array('class' => 'btn btn-lg btn-primary btn-block')))
-            ->getForm();
+        $forgotPasswordForm = $this->createForm(new ForgotPasswordType(), $ChangePasswordRequests);
 
         //$date = date('Y-m-d H:m:s',time() - 60 * 60 * 6);
         //$dateTime = date_create($date);
@@ -119,16 +118,11 @@ class LoginController extends Controller
         $email = $passwordResetRequest->getEmail();
         $user = $em->getRepository('UsersManagementBundle:User')->findOneByEmail($email);
 
-        $resetPasswordForm = $this->createFormBuilder($user)
-            ->add('password', 'repeated', array('first_name' => 'NewPassword', 'second_name' => 'ConfirmPassword', 'type' => 'password'))
-            ->add('save', 'submit', array('label' => 'Reset Password', 'attr' => array('class' => 'btn btn-lg btn-primary btn-block')))
-            ->getForm();
+        $resetPasswordForm = $this->createForm(new PasswordType(), $user);
 
         if ($request->getMethod() == 'POST') 
         {
             $resetPasswordForm->submit($request);
-
-                
 
                 $dateRequested = $passwordResetRequest->getRequestedAt();
                 $dateVerified = new \DateTime("now");
@@ -139,11 +133,11 @@ class LoginController extends Controller
             if ($resetPasswordForm->isValid()){
                 if ($dateInterval == '0, 0, 0') {
 
-                
                     $password = $resetPasswordForm["password"]->getData();
                     $encoder = $this->container->get('security.encoder_factory')->getEncoder($user);
                     $password = $encoder->encodePassword($password, $user->getSalt());
                     $user->setPassword($password);
+
                     $em->persist($user);
                     $em->flush();
 

@@ -14,18 +14,6 @@ class RegistrationController extends Controller
 	{
 		//building the form
 		$User = new User();
-		/*$registrationForm = $this->createFormBuilder($User)
-			->add('firstName', 'text', array('label' => 'First Name: ', 'attr' => array('class' => 'form-control')))
-			->add('lastName', 'text', array('label' => 'Last Name: ', 'attr' => array('class' => 'form-control')))
-			->add('email','email', array('label' => 'Email Address: ', 'attr' => array('class' => 'form-control')))
-			->add('password', 'repeated', array(
-				'first_name'  => 'password',
-				'second_name' => 'confirm',
-				'type' 		  => 'password'
-			))
-			
-			->add('save', 'submit', array('label' => 'Create Account', 'attr' => array('class' => 'btn btn-lg btn-primary btn-block')))
-			->getForm();*/
 
 		$registrationForm = $this->createForm(new UserType(), $User);
 		
