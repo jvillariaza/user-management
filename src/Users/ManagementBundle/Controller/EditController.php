@@ -2,11 +2,14 @@
 namespace Users\ManagementBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Users\ManagementBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\SecurityContextInterface;
+
+use Users\ManagementBundle\Entity\User;
+use Users\ManagementBundle\Form\AccountType;
+use Users\ManagementBundle\Form\ChangePasswordType;
 
 class EditController extends Controller
 {
@@ -19,11 +22,7 @@ class EditController extends Controller
 			throw $this->createNotFountException('Account no longer exists in the database');
 		}
 
-		$editForm = $this->createFormBuilder($user)
-			->add('firstName','text', array('attr' => array('class' => 'form-control')))
-			->add('lastName', 'text', array('attr' => array('class' => 'form-control')))
-			->add('save', 'submit', array('label' => 'Edit Account', 'attr' => array('class' => 'btn btn-lg btn-primary btn-block')))
-			->getForm();
+		$editForm = $this->createForm(new AccountType(), $user);
 
 		$email = $user->getEmail();
 
@@ -61,11 +60,7 @@ class EditController extends Controller
 
 		$currentPassword = $user->getPassword();
 
-		$changePasswordForm = $this->createFormBuilder($user)
-			->add('curPassword','password', array('label' => 'Current Password ', 'attr' => array('class' => 'form-control'), 'mapped' => false))
-			->add('password', 'repeated', array('first_name' => 'NewPassword', 'second_name' => 'ConfirmPassword', 'type' => 'password'))
-			->add('save', 'submit', array('label' => 'Change Password', 'attr' => array('class' => 'btn btn-lg btn-primary btn-block')))
-			->getForm();
+		$changePasswordForm = $this->createForm(new ChangePasswordType(), $user);
 
 		if ($request->getMethod() == 'POST') {
 				$changePasswordForm->submit($request);

@@ -135,10 +135,7 @@ class __TwigTemplate_7d644394c369235c07ecc52d3f37256f155e757bbfa9861b35a4df2350d
         echo "
 
 \t\t    <div style = \"margin-top: 4px; width: 300px;\">
-\t\t        ";
-        // line 40
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "save"), 'widget');
-        echo "
+\t\t        <button type = \"submit\" class = \"btn btn-lg btn-primary btn-block\">Change Password</button>
 \t\t    </div>
 \t\t</div>
 \t";
@@ -167,6 +164,6 @@ class __TwigTemplate_7d644394c369235c07ecc52d3f37256f155e757bbfa9861b35a4df2350d
 
     public function getDebugInfo()
     {
-        return array (  151 => 45,  146 => 43,  140 => 40,  134 => 37,  130 => 36,  126 => 35,  122 => 34,  118 => 33,  114 => 32,  111 => 31,  102 => 28,  99 => 27,  94 => 26,  85 => 23,  82 => 22,  78 => 21,  74 => 19,  70 => 17,  68 => 16,  60 => 15,  56 => 13,  52 => 11,  50 => 10,  42 => 9,  37 => 7,  31 => 3,  28 => 2,);
+        return array (  148 => 45,  143 => 43,  134 => 37,  130 => 36,  126 => 35,  122 => 34,  118 => 33,  114 => 32,  111 => 31,  102 => 28,  99 => 27,  94 => 26,  85 => 23,  82 => 22,  78 => 21,  74 => 19,  70 => 17,  68 => 16,  60 => 15,  56 => 13,  52 => 11,  50 => 10,  42 => 9,  37 => 7,  31 => 3,  28 => 2,);
     }
 }
