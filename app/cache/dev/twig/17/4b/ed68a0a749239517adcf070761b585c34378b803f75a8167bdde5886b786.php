@@ -39,7 +39,7 @@ class __TwigTemplate_174bed68a0a749239517adcf070761b585c34378b803f75a8167bdde588
         echo "</title>
     </head>
 
-    <body style = \"background-color: #CCCCCC\">
+    <body style = \"background-color: whitesmoke\">
         <div class = \"container\" style = \"margin-left: 600px\">
             ";
         // line 21

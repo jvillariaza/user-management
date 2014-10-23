@@ -16,8 +16,8 @@ class EditControllerTest extends WebTestCase
 
 		// submit the form for registration
 		$crawler = $client->submit($registrationForm, array(
-			'form[firstName]' => 'Jhoanne',
-			'form[lastName]' => 'Villariaza'
+			'form[firstName]' => 'Edited Name',
+			'form[lastName]' => 'Edited Last Name'
 		));
 
 		$this->assertEquals(302, $client->getResponse()->getStatusCode());

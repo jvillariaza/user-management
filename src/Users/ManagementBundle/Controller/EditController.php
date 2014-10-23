@@ -73,20 +73,16 @@ class EditController extends Controller
 				$password = $encoder->encodePassword($password, $user->getSalt());
 
 				if ($password == $currentPassword) {
+					
 					$newpassword = $changePasswordForm["password"]->getData();
+					$encoder = $this->container->get('security.encoder_factory')->getEncoder($user);
+					$user->setPassword($encoder->encodePassword($newpassword, $user->getSalt()));
 
-					//if(strlen($newpassword) >= 6){
-						$encoder = $this->container->get('security.encoder_factory')->getEncoder($user);
-						$user->setPassword($encoder->encodePassword($newpassword, $user->getSalt()));
+					$em->persist($user);
+					$em->flush();
 
-						$em->persist($user);
-						$em->flush();
-
-						$this->get('session')->getFlashBag()->add('alert-success', 'Successfully changed password.');
-	                    return $this->redirect($this->generateUrl('change_password', array('id' => $user->getId())));
-					//}
-					//$this->get('session')->getFlashBag()->add('alert-danger', 'New Password is invalid. Make sure they match and has at least 6 characters.');
-                	//return $this->redirect($this->generateUrl('change_password', array('id' => $user->getId())));
+					$this->get('session')->getFlashBag()->add('alert-success', 'Successfully changed password.');
+                    return $this->redirect($this->generateUrl('change_password', array('id' => $user->getId())));
 				}
 
 				$this->get('session')->getFlashBag()->add('alert-danger', 'Password mismatch');
