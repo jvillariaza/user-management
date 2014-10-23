@@ -21,8 +21,8 @@ class RegistrationControllerTest extends WebTestCase
 			'form[firstName]' => 'Joan',
 			'form[lastName]' => 'Villariaza',
 			'form[email]' => 'jhoanne.villariaza@gmail.com',
-			'form[password][password]' => 'joanvillariaza',
-			'form[password][confirm]' => 'joanvillariaza'
+			'form[password][password]' => 'joan@123',
+			'form[password][confirm]' => 'joan@123'
 		));
 
 		$this->assertEquals(200, $client->getResponse()->getStatusCode());

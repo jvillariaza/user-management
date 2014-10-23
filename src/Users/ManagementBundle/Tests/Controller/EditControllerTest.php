@@ -33,10 +33,11 @@ class EditControllerTest extends WebTestCase
 
 		// submit the form
 		$crawler = $client->submit($changePasswordForm, array(
-			'form[password]' => 'thisismynewpassword',
-			'form[newPassword][NewPassword]' => 'joan@123',
-			'form[newPassword][ConfirmPassword]' => 'joan@123'
+			'form[curPassword]' => 'joan@123',
+			'form[password][NewPassword]' => 'joan@123',
+			'form[password][ConfirmPassword]' => 'joan@123'
 		));
+
 		$this->assertEquals(302, $client->getResponse()->getStatusCode());
 	}
 }

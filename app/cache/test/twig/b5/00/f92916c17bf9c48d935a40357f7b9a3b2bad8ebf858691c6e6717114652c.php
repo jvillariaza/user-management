@@ -57,37 +57,56 @@ class __TwigTemplate_b500f92916c17bf9c48d935a40357f7b9a3b2bad8ebf858691c6e671711
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 15
         echo "
-\t\t    ";
+\t\t\t<div class=\"form-group";
         // line 16
+        if ($this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "password"), "NewPassword"), 'errors')) {
+            echo " has-error";
+        } else {
+            echo " has-success";
+        }
+        echo " has-feedback\" style = \"width: 337px\">
+\t          ";
+        // line 17
+        if ($this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "password"), "NewPassword"), 'errors')) {
+            // line 18
+            echo "\t            <h4><span class = \"label label-danger\"> - Password inputted is invalid. Please make sure they match and of at least 6 characters.</span></h4>
+\t          ";
+        }
+        // line 20
+        echo "\t        </div>
+
+
+\t\t    ";
+        // line 23
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "password"), "NewPassword"), 'label');
         echo " 
 \t\t    ";
-        // line 17
+        // line 24
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "password"), "NewPassword"), 'widget', array("attr" => array("class" => "form-control")));
         echo "
 \t\t    ";
-        // line 18
+        // line 25
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "password"), "ConfirmPassword"), 'label');
         echo " 
 \t\t    ";
-        // line 19
+        // line 26
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "password"), "ConfirmPassword"), 'widget', array("attr" => array("class" => "form-control")));
         echo "
 
 \t\t    <div style = \"margin-top: 4px; width: 300px;\">
 \t\t        ";
-        // line 22
+        // line 29
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "save"), 'widget');
         echo "
 \t\t    </div>
 \t\t</div>
 \t";
-        // line 25
+        // line 32
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_end');
         echo "
 \t<p class=\"space\">
 \t    <a href=\"";
-        // line 27
+        // line 34
         echo $this->env->getExtension('routing')->getPath("user_login");
         echo "\"><span class=\"back\">&laquo; Back to login page</span></a>
 \t</p>
@@ -107,6 +126,6 @@ class __TwigTemplate_b500f92916c17bf9c48d935a40357f7b9a3b2bad8ebf858691c6e671711
 
     public function getDebugInfo()
     {
-        return array (  91 => 27,  86 => 25,  80 => 22,  74 => 19,  70 => 18,  66 => 17,  62 => 16,  59 => 15,  50 => 12,  47 => 11,  43 => 10,  37 => 7,  31 => 3,  28 => 2,);
+        return array (  110 => 34,  105 => 32,  99 => 29,  93 => 26,  89 => 25,  85 => 24,  81 => 23,  76 => 20,  72 => 18,  70 => 17,  62 => 16,  59 => 15,  50 => 12,  47 => 11,  43 => 10,  37 => 7,  31 => 3,  28 => 2,);
     }
 }

@@ -2,9 +2,11 @@
 namespace Users\ManagementBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Users\ManagementBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+
+use Users\ManagementBundle\Entity\User;
+use Users\ManagementBundle\Form\UserType;
 
 class RegistrationController extends Controller
 {
@@ -12,7 +14,7 @@ class RegistrationController extends Controller
 	{
 		//building the form
 		$User = new User();
-		$registrationForm = $this->createFormBuilder($User)
+		/*$registrationForm = $this->createFormBuilder($User)
 			->add('firstName', 'text', array('label' => 'First Name: ', 'attr' => array('class' => 'form-control')))
 			->add('lastName', 'text', array('label' => 'Last Name: ', 'attr' => array('class' => 'form-control')))
 			->add('email','email', array('label' => 'Email Address: ', 'attr' => array('class' => 'form-control')))
@@ -23,7 +25,9 @@ class RegistrationController extends Controller
 			))
 			
 			->add('save', 'submit', array('label' => 'Create Account', 'attr' => array('class' => 'btn btn-lg btn-primary btn-block')))
-			->getForm();
+			->getForm();*/
+
+		$registrationForm = $this->createForm(new UserType(), $User);
 		
 		$User->setAccountStatus(0);
 		$User->setSalt(uniqid(mt_rand())); 
