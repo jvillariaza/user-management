@@ -11,6 +11,7 @@ class LoginControllerTest extends WebTestCase
         $client = static::createClient();
 
         $crawler = $client->request('POST', '/login');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         $form = $crawler->selectButton('Login')->form();
 
@@ -19,6 +20,7 @@ class LoginControllerTest extends WebTestCase
         	'_username' => 'joan.villariaza@gmail.com',
         	'_password' => 'newRandomPassword'
         	));
+
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
         $this->assertTrue($client->getResponse()->isRedirect('http://localhost/dashboard'));
@@ -30,7 +32,6 @@ class LoginControllerTest extends WebTestCase
 
         $crawler = $client->request('POST', '/login');
         $form = $crawler->selectButton('Login')->form();
-        //var_dump("nganong empty?");die;
 
         //submit form
         $crawler = $client->submit($form, array(
@@ -40,7 +41,6 @@ class LoginControllerTest extends WebTestCase
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
         $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
-        //$this->assertGreaterThan(0, $crawler->filter('html:contains("Bad credentials")')->count());
     }
 
     
@@ -56,7 +56,7 @@ class LoginControllerTest extends WebTestCase
 
 		// submit the form
 		$crawler = $client->submit($registrationForm, array(
-			'form[email]' => 'joan.villariaza@gmail.com'
+			'forgotPassword[email]' => 'joan.villariaza@gmail.com'
 		));
 
 		$this->assertEquals(302, $client->getResponse()->getStatusCode());
@@ -83,15 +83,15 @@ class LoginControllerTest extends WebTestCase
     public function testForgotPasswordCheckAction()
     {
     	$client = static::createClient();
-        //var_dump("naa ko dire");die;
+
     	$crawler = $client->request('GET', '/forgotPasswordCheck/1');
 
     	$resetPasswordForm = $crawler->selectButton('Reset Password')->form();
 
     	// submit form
     	$crawler = $client->submit($resetPasswordForm, array(
-    		'form[password][NewPassword]' => 'newRandomPassword',
-    		'form[password][ConfirmPassword]' => 'newRandomPassword'
+    		'password[password][NewPassword]' => 'newRandomPassword',
+    		'password[password][ConfirmPassword]' => 'newRandomPassword'
     	));
 
     	$this->assertEquals(302, $client->getResponse()->getStatusCode());

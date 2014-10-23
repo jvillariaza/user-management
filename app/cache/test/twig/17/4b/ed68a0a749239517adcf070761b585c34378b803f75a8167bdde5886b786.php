@@ -39,7 +39,7 @@ class __TwigTemplate_174bed68a0a749239517adcf070761b585c34378b803f75a8167bdde588
         echo "</title>
     </head>
 
-    <body style = \"background-color: #CCCCCC\">
+    <body style = \"background-color: whitesmoke\">
         <div class = \"container\" style = \"margin-left: 600px\">
             ";
         // line 21
@@ -68,6 +68,6 @@ class __TwigTemplate_174bed68a0a749239517adcf070761b585c34378b803f75a8167bdde588
 
     public function getDebugInfo()
     {
-        return array (  60 => 21,  54 => 16,  48 => 22,  46 => 21,  38 => 16,  21 => 1,  96 => 29,  91 => 27,  85 => 24,  79 => 21,  75 => 20,  71 => 19,  67 => 18,  63 => 17,  59 => 15,  50 => 12,  47 => 11,  43 => 10,  37 => 7,  31 => 3,  28 => 2,);
+        return array (  60 => 21,  54 => 16,  48 => 22,  46 => 21,  38 => 16,  21 => 1,  93 => 29,  88 => 27,  79 => 21,  75 => 20,  71 => 19,  67 => 18,  63 => 17,  59 => 15,  50 => 12,  47 => 11,  43 => 10,  37 => 7,  31 => 3,  28 => 2,);
     }
 }

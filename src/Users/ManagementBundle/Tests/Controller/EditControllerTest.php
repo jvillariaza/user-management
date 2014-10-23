@@ -16,11 +16,12 @@ class EditControllerTest extends WebTestCase
 
 		// submit the form for registration
 		$crawler = $client->submit($registrationForm, array(
-			'form[firstName]' => 'Edited Name',
-			'form[lastName]' => 'Edited Last Name'
+			'account[firstName]' => 'Edited Name',
+			'account[lastName]' => 'Edited Last Name'
 		));
 
 		$this->assertEquals(302, $client->getResponse()->getStatusCode());
+		//$this->assertTrue($client->getResponse()->isRedirect('http://localhost/editAccount/40'));
 	}
 
 	public function testChangePasswordAction()
@@ -33,11 +34,12 @@ class EditControllerTest extends WebTestCase
 
 		// submit the form
 		$crawler = $client->submit($changePasswordForm, array(
-			'form[curPassword]' => 'joan@123',
-			'form[password][NewPassword]' => 'joan@123',
-			'form[password][ConfirmPassword]' => 'joan@123'
+			'changepassword[curPassword]' => 'joan@123',
+			'changepassword[password][NewPassword]' => 'joan@123',
+			'changepassword[password][ConfirmPassword]' => 'joan@123'
 		));
 
 		$this->assertEquals(302, $client->getResponse()->getStatusCode());
+		//$this->assertTrue($client->getResponse()->isRedirect('http://localhost/changePassword/40'));
 	}
 }

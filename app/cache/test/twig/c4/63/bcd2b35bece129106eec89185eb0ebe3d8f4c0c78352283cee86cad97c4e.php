@@ -85,10 +85,7 @@ class __TwigTemplate_c463bcd2b35bece129106eec89185eb0ebe3d8f4c0c78352283cee86cad
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "email"), 'widget');
         echo "
             <div style = \"margin-top: 4px; width: 300px;\">
-                ";
-        // line 26
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "save"), 'widget');
-        echo "
+                <button type = \"submit\" class = \"btn btn-lg btn-primary btn-block\">Forgot Password</button>
             </div>
         </div>
         
@@ -96,6 +93,13 @@ class __TwigTemplate_c463bcd2b35bece129106eec89185eb0ebe3d8f4c0c78352283cee86cad
         // line 30
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_end');
         echo "
+
+    <p class=\"space\">
+        <a href=\"";
+        // line 33
+        echo $this->env->getExtension('routing')->getPath("user_login");
+        echo "\"><span class=\"back\">&laquo; Back to login page</span></a>
+    </p>
 
 ";
     }
@@ -112,6 +116,6 @@ class __TwigTemplate_c463bcd2b35bece129106eec89185eb0ebe3d8f4c0c78352283cee86cad
 
     public function getDebugInfo()
     {
-        return array (  97 => 30,  90 => 26,  85 => 24,  81 => 23,  78 => 22,  69 => 19,  66 => 18,  62 => 17,  56 => 13,  52 => 11,  50 => 10,  42 => 9,  34 => 4,  31 => 3,  28 => 2,);
+        return array (  100 => 33,  94 => 30,  85 => 24,  81 => 23,  78 => 22,  69 => 19,  66 => 18,  62 => 17,  56 => 13,  52 => 11,  50 => 10,  42 => 9,  34 => 4,  31 => 3,  28 => 2,);
     }
 }
