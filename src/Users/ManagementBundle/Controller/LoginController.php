@@ -120,7 +120,7 @@ class LoginController extends Controller
         $user = $em->getRepository('UsersManagementBundle:User')->findOneByEmail($email);
 
         $resetPasswordForm = $this->createFormBuilder($user)
-            ->add('password', 'repeated', array('first_name' => 'NewPassword', 'second_name' => 'ConfirmPassword', 'type' => 'password', 'pattern' => '.{6,}', 'mapped' => false))
+            ->add('password', 'repeated', array('first_name' => 'NewPassword', 'second_name' => 'ConfirmPassword', 'type' => 'password'))
             ->add('save', 'submit', array('label' => 'Reset Password', 'attr' => array('class' => 'btn btn-lg btn-primary btn-block')))
             ->getForm();
 
@@ -136,7 +136,8 @@ class LoginController extends Controller
                 $dateInterval = $dateRequested->diff($dateVerified);
                 $dateInterval = $dateInterval->format('%y, %m, %d');
 
-            if ($resetPasswordForm->isValid() || $dateInterval == '0, 0, 0'){
+            if ($resetPasswordForm->isValid()){
+                if ($dateInterval == '0, 0, 0') {
 
                 
                     $password = $resetPasswordForm["password"]->getData();
@@ -148,6 +149,7 @@ class LoginController extends Controller
 
                     $this->get('session')->getFlashBag()->add('alert-success', 'Successfully reset password.');
                     return $this->redirect($this->generateUrl('user_login'));
+                }
             }
             
         }

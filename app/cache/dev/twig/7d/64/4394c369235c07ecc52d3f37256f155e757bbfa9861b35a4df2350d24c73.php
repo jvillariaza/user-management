@@ -37,16 +37,51 @@ class __TwigTemplate_7d644394c369235c07ecc52d3f37256f155e757bbfa9861b35a4df2350d
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_start');
         echo "
     \t<div style = \"width: 300px; margin-left: 30px\">
+    \t\t<div class=\"form-group";
+        // line 9
+        if ($this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "password"), 'errors')) {
+            echo " has-error";
+        } else {
+            echo " has-success";
+        }
+        echo " has-feedback\" style = \"width: 337px\">
+\t          ";
+        // line 10
+        if ($this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "password"), 'errors')) {
+            // line 11
+            echo "\t            <h4><span class = \"label label-danger\"> - Password inputted is invalid. Please make sure that it's your current password.</span></h4>
+\t          ";
+        }
+        // line 13
+        echo "\t        </div>
+
+\t        <div class=\"form-group";
+        // line 15
+        if ($this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "newPassword"), "NewPassword"), 'errors')) {
+            echo " has-error";
+        } else {
+            echo " has-success";
+        }
+        echo " has-feedback\" style = \"width: 337px\">
+\t          ";
+        // line 16
+        if ($this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "newPassword"), "NewPassword"), 'errors')) {
+            // line 17
+            echo "\t            <h4><span class = \"label label-danger\"> - New Password inputted is invalid. Please make sure that they match or at least 6 characters.</span></h4>
+\t          ";
+        }
+        // line 19
+        echo "\t        </div>
 
 \t\t\t";
-        // line 10
+        // line 21
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "session"), "flashbag"), "get", array(0 => "alert-success"), "method"));
         foreach ($context['_seq'] as $context["_key"] => $context["flashMessage"]) {
-            // line 11
+            // line 22
             echo "\t\t\t\t<div class=\"alert alert-success\" role=\"alert\">
 \t\t\t\t\t";
-            // line 12
+            // line 23
             echo twig_escape_filter($this->env, (isset($context["flashMessage"]) ? $context["flashMessage"] : $this->getContext($context, "flashMessage")), "html", null, true);
             echo "
 \t\t\t\t</div> 
@@ -55,47 +90,64 @@ class __TwigTemplate_7d644394c369235c07ecc52d3f37256f155e757bbfa9861b35a4df2350d
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['flashMessage'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 15
+        // line 26
+        echo "\t\t\t";
+        $context['_parent'] = (array) $context;
+        $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "session"), "flashbag"), "get", array(0 => "alert-danger"), "method"));
+        foreach ($context['_seq'] as $context["_key"] => $context["flashMessage"]) {
+            // line 27
+            echo "\t\t\t\t<div class=\"alert alert-danger\" role=\"alert\">
+\t\t\t\t\t";
+            // line 28
+            echo twig_escape_filter($this->env, (isset($context["flashMessage"]) ? $context["flashMessage"] : $this->getContext($context, "flashMessage")), "html", null, true);
+            echo "
+\t\t\t\t</div> 
+\t\t\t";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['flashMessage'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 31
         echo "
 \t\t\t";
-        // line 16
+        // line 32
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "password"), 'label');
         echo " 
 \t\t    ";
-        // line 17
+        // line 33
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "password"), 'widget');
         echo "
 \t\t    ";
-        // line 18
+        // line 34
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "newPassword"), "NewPassword"), 'label');
         echo " 
 \t\t    ";
-        // line 19
+        // line 35
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "newPassword"), "NewPassword"), 'widget', array("attr" => array("class" => "form-control")));
         echo "
 \t\t    ";
-        // line 20
+        // line 36
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "newPassword"), "ConfirmPassword"), 'label');
         echo " 
 \t\t    ";
-        // line 21
+        // line 37
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "newPassword"), "ConfirmPassword"), 'widget', array("attr" => array("class" => "form-control")));
         echo "
 
 \t\t    <div style = \"margin-top: 4px; width: 300px;\">
 \t\t        ";
-        // line 24
+        // line 40
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "save"), 'widget');
         echo "
 \t\t    </div>
 \t\t</div>
 \t";
-        // line 27
+        // line 43
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_end');
         echo "
 \t<p class=\"space\">
 \t    <a href=\"";
-        // line 29
+        // line 45
         echo $this->env->getExtension('routing')->getPath("dashboard");
         echo "\"><span class=\"back\">&laquo; Back to dashboard</span></a>
 \t</p>
@@ -115,6 +167,6 @@ class __TwigTemplate_7d644394c369235c07ecc52d3f37256f155e757bbfa9861b35a4df2350d
 
     public function getDebugInfo()
     {
-        return array (  99 => 29,  94 => 27,  88 => 24,  82 => 21,  78 => 20,  74 => 19,  70 => 18,  66 => 17,  62 => 16,  59 => 15,  50 => 12,  47 => 11,  43 => 10,  37 => 7,  31 => 3,  28 => 2,);
+        return array (  151 => 45,  146 => 43,  140 => 40,  134 => 37,  130 => 36,  126 => 35,  122 => 34,  118 => 33,  114 => 32,  111 => 31,  102 => 28,  99 => 27,  94 => 26,  85 => 23,  82 => 22,  78 => 21,  74 => 19,  70 => 17,  68 => 16,  60 => 15,  56 => 13,  52 => 11,  50 => 10,  42 => 9,  37 => 7,  31 => 3,  28 => 2,);
     }
 }

@@ -68,28 +68,34 @@ class EditController extends Controller
 			->getForm();
 
 		if ($request->getMethod() == 'POST') {
-			$changePasswordForm->submit($request);
+				$changePasswordForm->submit($request);
 
 			if ($changePasswordForm->isValid()) {
 
+				//var_dump("nisulod ko"); die;
 				$password = $changePasswordForm["password"]->getData();
 				$encoder = $this->container->get('security.encoder_factory')->getEncoder($user);
 				$password = $encoder->encodePassword($password, $user->getSalt());
-				$newpassword = $changePasswordForm["newPassword"]->getData();
-				$encoder = $this->container->get('security.encoder_factory')->getEncoder($user);
-				$user->setPassword($encoder->encodePassword($newpassword, $user->getSalt()));
 
 				if ($password == $currentPassword) {
+					$newpassword = $changePasswordForm["newPassword"]->getData();
 
-					$em->persist($user);
-					$em->flush();
+					if(strlen($newpassword) >= 6){
+						$encoder = $this->container->get('security.encoder_factory')->getEncoder($user);
+						$user->setPassword($encoder->encodePassword($newpassword, $user->getSalt()));
 
-					$this->get('session')->getFlashBag()->add('alert-success', 'Successfully changed password.');
-                    return $this->redirect($this->generateUrl('change_password', array('id' => $user->getId())));
-				}else {
-					$this->get('session')->getFlashBag()->add('alert-danger', 'Password mismatch');
-                    return $this->redirect($this->generateUrl('change_password', array('id' => $user->getId())));
+						$em->persist($user);
+						$em->flush();
+
+						$this->get('session')->getFlashBag()->add('alert-success', 'Successfully changed password.');
+	                    return $this->redirect($this->generateUrl('change_password', array('id' => $user->getId())));
+					}
+					$this->get('session')->getFlashBag()->add('alert-danger', 'New Password is invalid. Make sure they match and has at least 6 characters.');
+                	return $this->redirect($this->generateUrl('change_password', array('id' => $user->getId())));
 				}
+
+				$this->get('session')->getFlashBag()->add('alert-danger', 'Password mismatch');
+                return $this->redirect($this->generateUrl('change_password', array('id' => $user->getId())));
 			}
 		}
 		return $this->render('UsersManagementBundle:Account:changePassword.html.twig', array('form' => $changePasswordForm->createView()));

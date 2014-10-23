@@ -13,4 +13,3 @@ Users\ManagementBundle\Entity\User:
             - NotBlank: ~
             - Length:
                 min: 6
-                minMessage: Your password is too short. It should contain {{ limit }} characters or more.
