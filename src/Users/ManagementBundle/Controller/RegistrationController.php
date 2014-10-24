@@ -12,27 +12,24 @@ class RegistrationController extends Controller
 {
 	public function registerAction(Request $request)
 	{
-		//building the form
 		$User = new User();
 
 		$registrationForm = $this->createForm(new UserType(), $User);
 		
 		$User->setAccountStatus(0);
-		$User->setSalt(uniqid(mt_rand())); 
+		$User->setSalt(md5(uniqid(mt_rand()))); 
 
 		$registrationForm->handleRequest($request);
 		
-		if($registrationForm->isValid()){
-			
-			// Set encrypted password
+		if ($registrationForm->isValid()) {
+
 			$encoder = $this->container->get('security.encoder_factory')->getEncoder($User);
 			$password = $encoder->encodePassword($User->getPassword(), $User->getSalt());
 			$User->setPassword($password);
 
-			// For confirmation email
+			// Code for confirmation email
 			$confirmationId = $encoder->encodePassword($User->getEmail(), $User->getSalt());
-
-			//push to database
+			
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($User);
 			$em->flush();
@@ -67,7 +64,7 @@ class RegistrationController extends Controller
 
 		//checking if user already activated his/her account.
 		if($user->getAccountStatus() == 1){
-			$this->get('session')->getFlashBag()->add('alert-success', 'You cannot activate account more than once.');
+			$this->get('session')->getFlashBag()->add('alert-success', 'You cannot activate your account more than once.');
 			return $this->redirect($this->generateUrl('user_login'));
 		}
 
