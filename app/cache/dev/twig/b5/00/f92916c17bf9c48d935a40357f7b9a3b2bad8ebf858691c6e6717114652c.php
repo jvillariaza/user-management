@@ -94,7 +94,7 @@ class __TwigTemplate_b500f92916c17bf9c48d935a40357f7b9a3b2bad8ebf858691c6e671711
         echo "
 
 \t\t    <div style = \"margin-top: 4px; width: 300px;\">
-\t\t        <button type = \"submit\" class = \"btn btn-lg btn-primary btn-block\">Register</button>
+\t\t        <button type = \"submit\" class = \"btn btn-lg btn-primary btn-block\">Reset Password</button>
 \t\t    </div>
 \t\t</div>
 \t";

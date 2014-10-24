@@ -100,7 +100,7 @@ class __TwigTemplate_2c2327e98de17162f59f30de7eab0a636a5f587dbd98db432e688fdf3dc
         // line 25
         if ($this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "password"), "password"), 'errors')) {
             // line 26
-            echo "            <h4><span class = \"label label-danger\"> - Please check password. It has to be 6 characters and above.</span></h4>
+            echo "            <h4><span class = \"label label-danger\"> - Please check password. It has to be match and of at least 6 characters.</span></h4>
           ";
         }
         // line 28

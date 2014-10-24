@@ -21,7 +21,7 @@ class EditControllerTest extends WebTestCase
 		));
 
 		$this->assertEquals(302, $client->getResponse()->getStatusCode());
-		//$this->assertTrue($client->getResponse()->isRedirect('http://localhost/editAccount/40'));
+		$this->assertTrue($client->getResponse()->isRedirect('/dashboard'));
 	}
 
 	public function testChangePasswordAction()
@@ -40,6 +40,7 @@ class EditControllerTest extends WebTestCase
 		));
 
 		$this->assertEquals(302, $client->getResponse()->getStatusCode());
-		//$this->assertTrue($client->getResponse()->isRedirect('http://localhost/changePassword/40'));
+		$this->assertTrue($client->getResponse()->isRedirect('/changePassword/40'));
+		//$this->assertTrue($crawler->filter('html:contains("Successfully changed password.")')->count() > 0);
 	}
 }

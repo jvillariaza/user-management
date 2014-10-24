@@ -38,6 +38,11 @@ class ChangePasswordRequests
     protected $requested_at;
 
     /**
+     * @ORM\Column(type="integer", options={"default":0})
+     */
+    protected $accountStatus;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -91,5 +96,28 @@ class ChangePasswordRequests
     public function getRequestedAt()
     {
         return $this->requested_at;
+    }
+
+    /**
+     * Set accountStatus
+     *
+     * @param integer $accountStatus
+     * @return User
+     */
+    public function setAccountStatus($accountStatus)
+    {
+        $this->accountStatus = $accountStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get accountStatus
+     *
+     * @return integer 
+     */
+    public function getAccountStatus()
+    {
+        return $this->accountStatus;
     }
 }

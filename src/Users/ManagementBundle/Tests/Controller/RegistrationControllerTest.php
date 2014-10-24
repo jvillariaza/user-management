@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class RegistrationControllerTest extends WebTestCase
 {
-	public function testRegisterAction()
+	public function testRegisterActionNotYetRegistered()
 	{
 		$client = static::createClient();
 
@@ -14,7 +14,7 @@ class RegistrationControllerTest extends WebTestCase
 		$client->followRedirects(false);
 		$client->enableProfiler();
 		$registrationForm = $crawler->selectButton('Register')->form();
-		
+
 		// submit the form for registration
 		$crawler = $client->submit($registrationForm, array(
 			'user[firstName]' => 'Joan',
@@ -48,4 +48,26 @@ class RegistrationControllerTest extends WebTestCase
         );*/
 
 	}
+
+	public function testRegisterActionAccountAlreadyRegistered()
+	{
+		$client = static::createClient();
+
+		$crawler = $client->request('POST', '/register');
+
+		$registrationForm = $crawler->selectButton('Register')->form();
+
+		// submit the form for registration
+		$crawler = $client->submit($registrationForm, array(
+			'user[firstName]' => 'Joan',
+			'user[lastName]' => 'Villariaza',
+			'user[email]' => 'joan.villariaza@gmail.com',
+			'user[password][password]' => 'joan@123',
+			'user[password][confirm]' => 'joan@123'
+		));
+
+		$this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        //$this->assertTrue($client->getResponse()->isRedirect('http://localhost/register'));
+    }
 }

@@ -23,7 +23,7 @@ class LoginControllerTest extends WebTestCase
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
-        $this->assertTrue($client->getResponse()->isRedirect('http://localhost/dashboard'));
+        $this->assertTrue($client->getResponse()->isRedirect('/dashboard'));
     }
 
     public function testDoLoginActionWrongCredentials()
@@ -40,7 +40,7 @@ class LoginControllerTest extends WebTestCase
         	));
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
-        $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
+        $this->assertTrue($client->getResponse()->isRedirect('/login'));
     }
 
     
@@ -78,6 +78,9 @@ class LoginControllerTest extends WebTestCase
         $this->assertEquals('Forgot Password Request', $message->getSubject());
         $this->assertEquals('joan.villariaza@chromedia.com', key($message->getFrom()));
         $this->assertEquals('joan.villariaza@gmail.com', key($message->getTo()));
+        /*$this->assertEquals('',
+            $message->getBody()
+        );*/
     }
 
     public function testForgotPasswordCheckAction()

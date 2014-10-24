@@ -72,15 +72,9 @@ class LoginController extends Controller
                     return $this->redirect($this->generateUrl('forgot_password'));
                 } else {
 
-                    //$email = $user->getemail();
-                    // Save email to new table with timestamp
-                    
-                    
-                    //$ChangePasswordRequests = $ChangePasswordRequests->setUser($user);
                     $ChangePasswordRequests->setEmail($email);
-
                     $uniqueKey = md5(uniqid($email));
-                    //$ChangePasswordRequests->setRequestedAt($date);
+                    $ChangePasswordRequests->setAccountStatus(0);
 
                     $em->persist($ChangePasswordRequests);
                     $em->flush();
@@ -117,35 +111,45 @@ class LoginController extends Controller
         $passwordResetRequest = $em->getRepository('UsersManagementBundle:ChangePasswordRequests')->find($id);
         $email = $passwordResetRequest->getEmail();
         $user = $em->getRepository('UsersManagementBundle:User')->findOneByEmail($email);
+        $status = $passwordResetRequest->getAccountStatus();
 
-        $resetPasswordForm = $this->createForm(new PasswordType(), $user);
+        if ($status == 0) {
+            $resetPasswordForm = $this->createForm(new PasswordType(), $user);
 
-        if ($request->getMethod() == 'POST') 
-        {
-            $resetPasswordForm->submit($request);
-
+            if ($request->getMethod() == 'POST') 
+            {
+                $resetPasswordForm->submit($request);
                 $dateRequested = $passwordResetRequest->getRequestedAt();
                 $dateVerified = new \DateTime("now");
 
                 $dateInterval = $dateRequested->diff($dateVerified);
                 $dateInterval = $dateInterval->format('%y, %m, %d');
 
-            if ($resetPasswordForm->isValid()){
-                if ($dateInterval == '0, 0, 0') {
+                if ($resetPasswordForm->isValid()){
+                    if ($dateInterval == '0, 0, 0') {
 
-                    $password = $resetPasswordForm["password"]->getData();
-                    $encoder = $this->container->get('security.encoder_factory')->getEncoder($user);
-                    $password = $encoder->encodePassword($password, $user->getSalt());
-                    $user->setPassword($password);
+                        $password = $resetPasswordForm["password"]->getData();
+                        $encoder = $this->container->get('security.encoder_factory')->getEncoder($user);
+                        $password = $encoder->encodePassword($password, $user->getSalt());
+                        $user->setPassword($password);
+                        
+                        $em->persist($user);
+                        $em->flush();
 
-                    $em->persist($user);
-                    $em->flush();
+                        // update status so the URL will no longer be accessible the next time the user try to change his password again
+                        $passwordResetRequest->setAccountStatus(1);
+                        $em->persist($passwordResetRequest);
+                        $em->flush();
 
-                    $this->get('session')->getFlashBag()->add('alert-success', 'Successfully reset password.');
-                    return $this->redirect($this->generateUrl('user_login'));
+                        $this->get('session')->getFlashBag()->add('alert-success', 'Successfully reset password.');
+                        return $this->redirect($this->generateUrl('user_login'));
+                    }
                 }
             }
-            
+        } 
+        else {
+            $this->get('session')->getFlashBag()->add('alert-success', 'The URL that you are trying to access has expired. Please get a new one.');
+            return $this->redirect($this->generateUrl('user_login'));
         }
         return $this->render('UsersManagementBundle:Account:resetPassword.html.twig', array('form' => $resetPasswordForm->createView()));
 
