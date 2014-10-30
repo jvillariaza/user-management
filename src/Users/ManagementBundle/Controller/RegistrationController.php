@@ -20,33 +20,37 @@ class RegistrationController extends Controller
 		$User->setSalt(md5(uniqid(mt_rand()))); 
 
 		$registrationForm->handleRequest($request);
+
+		if ($request->getMethod() == 'POST') {
 		
-		if ($registrationForm->isValid()) {
+			if ($registrationForm->isValid()) {
 
-			$encoder = $this->container->get('security.encoder_factory')->getEncoder($User);
-			$password = $encoder->encodePassword($User->getPassword(), $User->getSalt());
-			$User->setPassword($password);
+				$encoder = $this->container->get('security.encoder_factory')->getEncoder($User);
+				$password = $encoder->encodePassword($User->getPassword(), $User->getSalt());
+				$User->setPassword($password);
 
-			// Code for confirmation email
-			$confirmationId = $encoder->encodePassword($User->getEmail(), $User->getSalt());
-			
-			$em = $this->getDoctrine()->getManager();
-			$em->persist($User);
-			$em->flush();
+				$confirmationId = $encoder->encodePassword($User->getEmail(), $User->getSalt());
+				
+				$em = $this->getDoctrine()->getManager();
+				$em->persist($User);
+				$em->flush();
 
-			//sending of email
-			$message = \Swift_Message::newInstance()
-				->setSubject('Confirm Your Email')
-				->setFrom('joan.villariaza@chromedia.com')
-				->setTo($User->getEmail())
-				->setBody($this->renderView(
-					'UsersManagementBundle:Email:confirmation.html.twig', array(
-						'name' => $User->getFirstName(), 
-						'confirmationLink' => $this->generateUrl('confirm_user_registration', array('id' => $User->getId(), 'confirmationId' => $confirmationId), true)
-					)
-				));
-			$this->get('mailer')->send($message);
-			$this->get('session')->getFlashBag()->add('alert-success', 'You have successfully created your account. Please click the link sent to your mailbox for account confirmation. Thank you.');
+				$this->get('session')->getFlashBag()->add('alert-success', 'You have successfully created your account. Please click the link sent to your mailbox for account confirmation. Thank you.');
+
+				//sending of email
+				$message = \Swift_Message::newInstance()
+					->setSubject('Confirm Your Email')
+					->setFrom('joan.villariaza@chromedia.com')
+					->setTo($User->getEmail())
+					->setBody($this->renderView(
+						'UsersManagementBundle:Email:confirmation.html.twig', array(
+							'name' => $User->getFirstName(), 
+							'confirmationLink' => $this->generateUrl('confirm_user_registration', array('id' => $User->getId(), 'confirmationId' => $confirmationId), true)
+						)
+					));
+				$this->get('mailer')->send($message);
+			}
+
 		}
 
 		return $this->render('UsersManagementBundle:Account:registration.html.twig', array(

@@ -1,15 +1,23 @@
 Users\ManagementBundle\Entity\User:
     constraints:
-        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
+            fields: email
+            message: 'The email provided already exists. Please login using your credentials.'
     properties:
         firstName:
-            - NotBlank: ~
+            - NotBlank:
+                message: First name must not be blank.
         lastName:
-            - NotBlank: ~
+            - NotBlank: 
+                message: Last name must not be blank.
         email:
-            - NotBlank: ~
-            - Email: ~
+            - NotBlank: 
+                message: Email address must not be blank.
+            - Email: 
+                message: Please input a correct email address format.
         password:
-            - NotBlank: ~
+            - NotBlank: 
+                message: Passwords must not be blank.
             - Length:
                 min: 6
+                minMessage: Password inputted is too short. It has to be at least {{ limit }} characters.

@@ -1,7 +1,8 @@
+# This file is auto-generated during the composer install
 parameters:
     database_driver: pdo_mysql
     database_host: localhost
-    database_port: 
+    database_port: null
     database_name: simple_crud
     database_user: root
     database_password: root
@@ -11,4 +12,3 @@ parameters:
     mailer_password: null
     locale: en
     secret: 108d7871e0be2a436fcc377f3fae80847
-    database_path: null

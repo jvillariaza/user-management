@@ -10,7 +10,7 @@ class RegistrationControllerTest extends WebTestCase
 	{
 		$client = static::createClient();
 
-		$crawler = $client->request('POST', '/register');
+		$crawler = $client->request('GET', '/register');
 		$client->followRedirects(false);
 		$client->enableProfiler();
 		$registrationForm = $crawler->selectButton('Register')->form();
@@ -53,7 +53,7 @@ class RegistrationControllerTest extends WebTestCase
 	{
 		$client = static::createClient();
 
-		$crawler = $client->request('POST', '/register');
+		$crawler = $client->request('GET', '/register');
 
 		$registrationForm = $crawler->selectButton('Register')->form();
 

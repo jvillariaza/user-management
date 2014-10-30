@@ -10,6 +10,7 @@ class __TwigTemplate_d5b43b750ffacbb14eb1f2bc6b237609c8c1f2bcfd60b5c2797f302f768
         $this->parent = $this->env->loadTemplate("UsersManagementBundle::layout.html.twig");
 
         $this->blocks = array(
+            'title' => array($this, 'block_title'),
             'body' => array($this, 'block_body'),
         );
     }
@@ -25,28 +26,34 @@ class __TwigTemplate_d5b43b750ffacbb14eb1f2bc6b237609c8c1f2bcfd60b5c2797f302f768
     }
 
     // line 2
+    public function block_title($context, array $blocks = array())
+    {
+        echo "Edit Account";
+    }
+
+    // line 3
     public function block_body($context, array $blocks = array())
     {
-        // line 3
+        // line 4
         echo "    <div class=\"page-header\" style = \"width: 400px\">
         <h1>Edit Account</h1>
     </div>
 
     ";
-        // line 7
+        // line 8
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_start');
         echo "
 \t\t<div style = \"width: 300px; margin-left: 30px\">
 
 \t\t\t";
-        // line 10
+        // line 11
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "session"), "flashbag"), "get", array(0 => "alert-success"), "method"));
         foreach ($context['_seq'] as $context["_key"] => $context["flashMessage"]) {
-            // line 11
+            // line 12
             echo "\t\t\t\t<div class=\"alert alert-success\" role=\"alert\">
 \t\t\t\t\t";
-            // line 12
+            // line 13
             echo twig_escape_filter($this->env, (isset($context["flashMessage"]) ? $context["flashMessage"] : $this->getContext($context, "flashMessage")), "html", null, true);
             echo "
 \t\t\t\t</div> 
@@ -55,27 +62,27 @@ class __TwigTemplate_d5b43b750ffacbb14eb1f2bc6b237609c8c1f2bcfd60b5c2797f302f768
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['flashMessage'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 15
+        // line 16
         echo "
 \t\t\t<label for=\"email\">Email:</label>
 \t\t\t<input type = 'text' disabled class = \"form-control\" value = '";
-        // line 17
+        // line 18
         echo twig_escape_filter($this->env, (isset($context["email"]) ? $context["email"] : $this->getContext($context, "email")), "html", null, true);
         echo "' />
 \t\t\t";
-        // line 18
+        // line 19
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "firstName"), 'label');
         echo " 
 \t\t    ";
-        // line 19
+        // line 20
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "firstName"), 'widget');
         echo "
 \t\t    ";
-        // line 20
+        // line 21
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "lastName"), 'label');
         echo " 
 \t\t    ";
-        // line 21
+        // line 22
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "lastName"), 'widget');
         echo "
 
@@ -84,12 +91,12 @@ class __TwigTemplate_d5b43b750ffacbb14eb1f2bc6b237609c8c1f2bcfd60b5c2797f302f768
 \t\t    </div>
 \t\t</div>
 \t";
-        // line 27
+        // line 28
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_end');
         echo "
 \t<p class=\"space\">
 \t    <a href=\"";
-        // line 29
+        // line 30
         echo $this->env->getExtension('routing')->getPath("dashboard");
         echo "\"><span class=\"back\">&laquo; Back to dashboard</span></a>
 \t</p>
@@ -109,6 +116,6 @@ class __TwigTemplate_d5b43b750ffacbb14eb1f2bc6b237609c8c1f2bcfd60b5c2797f302f768
 
     public function getDebugInfo()
     {
-        return array (  93 => 29,  88 => 27,  79 => 21,  75 => 20,  71 => 19,  67 => 18,  63 => 17,  59 => 15,  50 => 12,  47 => 11,  43 => 10,  37 => 7,  31 => 3,  28 => 2,);
+        return array (  100 => 30,  95 => 28,  86 => 22,  82 => 21,  78 => 20,  74 => 19,  70 => 18,  66 => 16,  57 => 13,  54 => 12,  50 => 11,  44 => 8,  38 => 4,  35 => 3,  29 => 2,);
     }
 }

@@ -1,4 +1,5 @@
 {% extends 'UsersManagementBundle::layout.html.twig' %}
+{% block title %}Registration{% endblock %}
 {% block body %}
 
     {{ form_start(form) }}
@@ -6,40 +7,18 @@
             <h1>Register Account</h1>
         </div>
 
-        <div class="form-group{% if form_errors(form.firstName) %} has-error{% else %} has-success{% endif %} has-feedback" style = "width: 337px">
-          {% if form_errors(form.firstName) %}
-            <h4><span class = "label label-danger"> - Please provide first name</span></h4>
-          {% endif %}
-        </div>
-        <div class="form-group{% if form_errors(form.lastName) %} has-error{% else %} has-success{% endif %} has-feedback" style = "width: 337px">
-          {% if form_errors(form.lastName) %}
-            <h4><span class = "label label-danger"> - Please provide last name</span></h4>
-          {% endif %}
-        </div>
-        <div class="form-group{% if form_errors(form.email) %} has-error{% else %} has-success{% endif %} has-feedback" style = "width: 337px">
-          {% if form_errors(form.email) %}
-            <h4><span class = "label label-danger"> - The email address provided is invalid.</span></h4>
-          {% endif %}
-        </div>
-        <div class="form-group{% if form_errors(form.password.password) %} has-error{% else %} has-success{% endif %} has-feedback" style = "width: 337px">
-          {% if form_errors(form.password.password) %}
-            <h4><span class = "label label-danger"> - Please check password. It has to be match and of at least 6 characters.</span></h4>
-          {% endif %}
-        </div>
-        <div class="form-group{% if form_errors(form.password.confirm) %} has-error{% else %} has-success{% endif %} has-feedback" style = "width: 337px">
-          {% if form_errors(form.password.confirm) %}
-            <h4><span class = "label label-danger"> - Password did not match</span></h4>
-          {% endif %}
-        </div>
-
-        
-
         <div style = "width: 300px; margin-left: 30px">
         	{% for flashMessage in app.session.flashbag.get('alert-success') %}
-				<div class="alert alert-success" role="alert">
-				{{ flashMessage }}
-				</div> 
-			{% endfor %}
+    				<div class="alert alert-success" role="alert">{{ flashMessage }}</div> 
+    			{% endfor %}
+            <div class="alert alert-danger" role="alert">
+              {{ form_errors(form.firstName) }}
+              {{ form_errors(form.lastName) }}
+              {{ form_errors(form.email) }}
+              {{ form_errors(form.password.password) }}
+              {{ form_errors(form.password.confirm) }}
+            </div>
+
 
             {{ form_label(form.firstName) }} 
             {{ form_widget(form.firstName) }}

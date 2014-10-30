@@ -3,6 +3,10 @@ security:
         Users\ManagementBundle\Entity\User:
             id: sha256salted_encoder
 
+        #for DataFixtures
+        Users\ManagementBundle\Entity\UserTest:
+            id: sha256salted_encoder
+
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
