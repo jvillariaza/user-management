@@ -19,16 +19,17 @@ class __TwigTemplate_e98fe55da7a09b3b5ec765bed7cbac9171c52a61583319a8e8f338af339
         echo "Hello ";
         echo twig_escape_filter($this->env, (isset($context["name"]) ? $context["name"] : $this->getContext($context, "name")), "html", null, true);
         echo ",
-
+<br /> <br />
 Thank you for signing up to our website. 
-
+<br /> <br />
 Before you will officially part of the team, you still have to confirm your email by following the link below.
-
+<br /> <br />
+<hr />
 ";
-        // line 7
+        // line 8
         echo twig_escape_filter($this->env, (isset($context["confirmationLink"]) ? $context["confirmationLink"] : $this->getContext($context, "confirmationLink")), "html", null, true);
         echo "
-
+<br /> <br />
 Cheers!";
     }
 
@@ -44,6 +45,6 @@ Cheers!";
 
     public function getDebugInfo()
     {
-        return array (  29 => 7,  19 => 1,);
+        return array (  30 => 8,  19 => 1,);
     }
 }

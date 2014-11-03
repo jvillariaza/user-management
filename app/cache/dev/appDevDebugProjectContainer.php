@@ -165,6 +165,7 @@ class appDevDebugProjectContainer extends Container
             'sensio_framework_extra.view.guesser' => 'getSensioFrameworkExtra_View_GuesserService',
             'sensio_framework_extra.view.listener' => 'getSensioFrameworkExtra_View_ListenerService',
             'service_container' => 'getServiceContainerService',
+            'service_emailer' => 'getServiceEmailerService',
             'session' => 'getSessionService',
             'session.storage.filesystem' => 'getSession_Storage_FilesystemService',
             'session.storage.metadata_bag' => 'getSession_Storage_MetadataBagService',
@@ -2070,6 +2071,19 @@ class appDevDebugProjectContainer extends Container
     protected function getServiceContainerService()
     {
         throw new RuntimeException('You have requested a synthetic service ("service_container"). The DIC does not know how to construct this service.');
+    }
+
+    /**
+     * Gets the 'service_emailer' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Users\ManagementBundle\Helper\MailHelper A Users\ManagementBundle\Helper\MailHelper instance.
+     */
+    protected function getServiceEmailerService()
+    {
+        return $this->services['service_emailer'] = new \Users\ManagementBundle\Helper\MailHelper($this->get('swiftmailer.mailer.default'));
     }
 
     /**

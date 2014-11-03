@@ -13,7 +13,7 @@ class ChangePasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('curPassword','password', array('label' => 'Current Password ', 'attr' => array('class' => 'form-control'), 'mapped' => false))
-                ->add('password', 'repeated', array('first_name' => 'NewPassword', 'second_name' => 'ConfirmPassword', 'type' => 'password'));
+                ->add('password', 'repeated', array('first_name' => 'NewPassword', 'second_name' => 'ConfirmPassword', 'invalid_message' => 'Password did not match.', 'type' => 'password'));
     }
 
     public function getName()

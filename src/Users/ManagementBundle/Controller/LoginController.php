@@ -50,9 +50,7 @@ class LoginController extends Controller
         $ChangePasswordRequests = new ChangePasswordRequests();
 
         $forgotPasswordForm = $this->createForm(new ForgotPasswordType(), $ChangePasswordRequests);
-
-        $dateTime = new \DateTime("now");
-        $ChangePasswordRequests->setRequestedAt($dateTime);
+        $ChangePasswordRequests->setRequestedAt(new \DateTime("now"));
 
         if ($request->getMethod() == 'POST') {
 
@@ -77,20 +75,11 @@ class LoginController extends Controller
                     $em->persist($ChangePasswordRequests);
                     $em->flush();
 
-                    //sending of email
-                    $message = \Swift_Message::newInstance()
-                        ->setSubject('Forgot Password Request')
-                        ->setFrom('joan.villariaza@chromedia.com')
-                        ->setTo($email)
-                        ->setBody($this->renderView(
-                            'UsersManagementBundle:Email:forgotPassword.html.twig', array(
-                                'name' => $user->getFirstName(),
-                                'confirmationLink' => $this->generateUrl('forgot_password_check', array('id' => $ChangePasswordRequests->getId(), 'uniqueKey' => $uniqueKey), true)
-                            )
-                        ));
-                    $this->get('mailer')->send($message);
-
                     $this->get('session')->getFlashBag()->add('alert-success', 'Please click the link sent to your mailbox for resetting the password. Thank you.');
+                    //sending of email
+                    $mailBody = $this->renderView('UsersManagementBundle:Email:forgotPassword.html.twig', array('name' => $user->getFirstName(), 'confirmationLink' => $this->generateUrl('forgot_password_check', array('id' => $ChangePasswordRequests->getId(), 'uniqueKey' => $uniqueKey), true)));
+                    $this->get('service_emailer')->sendWithSwiftMailer("Forgot Password Request", $email, $mailBody);
+
                     return $this->redirect($this->generateUrl('user_login'));
                 }
             }
@@ -142,7 +131,7 @@ class LoginController extends Controller
                         return $this->redirect($this->generateUrl('user_login'));
 
                     } else {
-                        $this->get('session')->getFlashBag()->add('alert-success', 'The URL that you are trying to access has expired. Please get a new one.');
+                        $this->get('session')->getFlashBag()->add('alert-success', 'The URL that you are trying to access has expired. Please request a new one.');
                         return $this->redirect($this->generateUrl('user_login'));
                     }
                 }

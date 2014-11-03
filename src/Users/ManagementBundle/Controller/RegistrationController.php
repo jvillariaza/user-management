@@ -38,25 +38,11 @@ class RegistrationController extends Controller
 				$this->get('session')->getFlashBag()->add('alert-success', 'You have successfully created your account. Please click the link sent to your mailbox for account confirmation. Thank you.');
 
 				//sending of email
-				$message = \Swift_Message::newInstance()
-					->setSubject('Confirm Your Email')
-					->setFrom('joan.villariaza@chromedia.com')
-					->setTo($User->getEmail())
-					->setBody($this->renderView(
-						'UsersManagementBundle:Email:confirmation.html.twig', array(
-							'name' => $User->getFirstName(), 
-							'confirmationLink' => $this->generateUrl('confirm_user_registration', array('id' => $User->getId(), 'confirmationId' => $confirmationId), true)
-						)
-					));
-				$this->get('mailer')->send($message);
+				$mailBody = $this->renderView('UsersManagementBundle:Email:confirmation.html.twig', array('name' => $User->getFirstName(), 'confirmationLink' => $this->generateUrl('confirm_user_registration', array('id' => $User->getId(), 'confirmationId' => $confirmationId), true)));
+				$this->get('service_emailer')->sendWithSwiftMailer("Confirm Your Email", $User->getEmail(), $mailBody);
 			}
-
 		}
-
-		return $this->render('UsersManagementBundle:Account:registration.html.twig', array(
-			'form' => $registrationForm->createView(),
-		));
-
+		return $this->render('UsersManagementBundle:Account:registration.html.twig', array('form' => $registrationForm->createView()));
 	}
 
 	//Email Confirmation
@@ -68,15 +54,15 @@ class RegistrationController extends Controller
 
 		//checking if user already activated his/her account.
 		if($user->getAccountStatus() == 1){
-			$this->get('session')->getFlashBag()->add('alert-success', 'You cannot activate your account more than once.');
+			$this->get('session')->getFlashBag()->add('alert-danger', 'You cannot activate your account more than once.');
 			return $this->redirect($this->generateUrl('user_login'));
 		}
 
 		// Changing user status to active
 		$user->setAccountStatus(1);
 		$em->flush();
-		$this->get('session')->getFlashBag()->add('alert-success', 'You have successfully activated your account.');
-		return $this->redirect($this->generateUrl('user_login', array('message' => '==', true)));
+		$this->get('session')->getFlashBag()->add('alert-success', 'You have successfully activated your account. You may login now!');
+		return $this->redirect($this->generateUrl('user_login'));
 		
 	}
 }

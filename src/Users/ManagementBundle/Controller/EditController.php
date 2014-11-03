@@ -71,7 +71,7 @@ class EditController extends Controller
                     return $this->redirect($this->generateUrl('change_password', array('id' => $user->getId())));
 				}
 
-				$this->get('session')->getFlashBag()->add('alert-danger', 'Password mismatch');
+				$this->get('session')->getFlashBag()->add('danger', 'Password incorrect. Make sure it is your current password.');
                 return $this->redirect($this->generateUrl('change_password', array('id' => $user->getId())));
 			}
 		}

@@ -65,21 +65,38 @@ class __TwigTemplate_c0400408e937492896758af26eca1900d19649f879caff3469974c7a8f0
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['flashMessage'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 18
+        echo "\t\t\t";
+        $context['_parent'] = (array) $context;
+        $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "session"), "flashbag"), "get", array(0 => "alert-danger"), "method"));
+        foreach ($context['_seq'] as $context["_key"] => $context["flashMessage"]) {
+            // line 19
+            echo "\t\t\t\t<div class=\"alert alert-danger\" role=\"alert\">
+\t\t\t\t\t";
+            // line 20
+            echo twig_escape_filter($this->env, (isset($context["flashMessage"]) ? $context["flashMessage"] : $this->getContext($context, "flashMessage")), "html", null, true);
+            echo "
+\t\t\t\t</div> 
+\t\t\t";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['flashMessage'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 23
         echo "
 \t\t\t";
-        // line 19
+        // line 24
         if ((isset($context["error"]) ? $context["error"] : $this->getContext($context, "error"))) {
-            // line 20
+            // line 25
             echo "\t\t    \t<div class=\"alert alert-danger\" role=\"alert\">";
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["error"]) ? $context["error"] : $this->getContext($context, "error")), "message"), "html", null, true);
             echo "</div>
 \t\t\t";
         }
-        // line 22
+        // line 27
         echo "
 \t\t    <label for=\"username\">Username:</label>
 \t\t    <input class = \"form-control\" type=\"text\" id=\"username\" name=\"_username\" value=\"";
-        // line 24
+        // line 29
         echo twig_escape_filter($this->env, (isset($context["last_username"]) ? $context["last_username"] : $this->getContext($context, "last_username")), "html", null, true);
         echo "\" />
 
@@ -94,11 +111,11 @@ class __TwigTemplate_c0400408e937492896758af26eca1900d19649f879caff3469974c7a8f0
 
     <p class=\"space\">
     \t<a href=\"";
-        // line 36
+        // line 41
         echo $this->env->getExtension('routing')->getPath("account_register");
         echo "\"><span class=\"login-link f-left\">New here? Sign Up Now!</span></a> &nbsp;  &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 \t    <a href=\"";
-        // line 37
+        // line 42
         echo $this->env->getExtension('routing')->getPath("forgot_password");
         echo "\"><span class=\"back\">Forgot Password</span></a>
 \t</p>
@@ -117,6 +134,6 @@ class __TwigTemplate_c0400408e937492896758af26eca1900d19649f879caff3469974c7a8f0
 
     public function getDebugInfo()
     {
-        return array (  102 => 37,  98 => 36,  83 => 24,  79 => 22,  73 => 20,  71 => 19,  68 => 18,  59 => 15,  56 => 14,  52 => 13,  46 => 10,  38 => 4,  35 => 3,  29 => 2,);
+        return array (  119 => 42,  115 => 41,  100 => 29,  96 => 27,  90 => 25,  88 => 24,  85 => 23,  76 => 20,  73 => 19,  68 => 18,  59 => 15,  56 => 14,  52 => 13,  46 => 10,  38 => 4,  35 => 3,  29 => 2,);
     }
 }

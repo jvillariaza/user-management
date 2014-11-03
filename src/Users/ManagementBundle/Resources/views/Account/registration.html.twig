@@ -9,8 +9,8 @@
 
         <div style = "width: 300px; margin-left: 30px">
         	{% for flashMessage in app.session.flashbag.get('alert-success') %}
-    				<div class="alert alert-success" role="alert">{{ flashMessage }}</div> 
-    			{% endfor %}
+				<div class="alert alert-success" role="alert">{{ flashMessage }}</div> 
+			{% endfor %}
             <div class="alert alert-danger" role="alert">
               {{ form_errors(form.firstName) }}
               {{ form_errors(form.lastName) }}

@@ -2450,6 +2450,9 @@
       <argument type="service" id="security.role_hierarchy" on-invalid="null"/>
     </service>
     <service id="sha256salted_encoder" class="Users\ManagementBundle\Helper\Sha256SaltedHelper"/>
+    <service id="service_emailer" class="Users\ManagementBundle\Helper\MailHelper">
+      <argument type="service" id="swiftmailer.mailer.default"/>
+    </service>
     <service id="web_profiler.controller.profiler" class="Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController">
       <argument type="service" id="router" on-invalid="null"/>
       <argument type="service" id="profiler" on-invalid="null"/>

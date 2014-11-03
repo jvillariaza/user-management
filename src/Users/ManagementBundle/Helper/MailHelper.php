@@ -1,15 +1,32 @@
 <?php
+/**
+ * Mail Helper
+ *
+ * This class can be used again if ever there are other mailing service better than swiftMailer.
+ * @author Joan Villariaza
+ */
 namespace Users\ManagementBundle\Helper;
 
 class MailHelper
 {
-	public function SwiftMessageMailer($subject, $mailto, $body)
+	const EMAIL_FROM = 'joan.villariaza@chromedia.com';
+	const CONTENT_TYPE = 'text/html';
+
+	public function __construct($mailer)
 	{
-		// mailer
+		$this->mailer = $mailer;
+	}
+
+    public function sendWithSwiftMailer($subject, $mailto, $body) 
+    {
+    	// mailer
 		$message = \Swift_Message::newInstance()
+				->setContentType(self::CONTENT_TYPE)
 				->setSubject($subject)
-				->setFrom('joan.villariaza@chromedia.com')
+				->setFrom(self::EMAIL_FROM)
 				->setTo($mailto)
 				->setBody($body);
-	}
+
+		$this->mailer->send($message);
+    }
 }
