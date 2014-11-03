@@ -11,14 +11,15 @@
         	{% for flashMessage in app.session.flashbag.get('alert-success') %}
 				<div class="alert alert-success" role="alert">{{ flashMessage }}</div> 
 			{% endfor %}
-            <div class="alert alert-danger" role="alert">
-              {{ form_errors(form.firstName) }}
-              {{ form_errors(form.lastName) }}
-              {{ form_errors(form.email) }}
-              {{ form_errors(form.password.password) }}
-              {{ form_errors(form.password.confirm) }}
-            </div>
-
+            {% if(error) %}
+                <div class="alert alert-danger" role="alert">
+                  {{ form_errors(form.firstName) }}
+                  {{ form_errors(form.lastName) }}
+                  {{ form_errors(form.email) }}
+                  {{ form_errors(form.password.password) }}
+                  {{ form_errors(form.password.confirm) }}
+                </div>
+            {% endif %}
 
             {{ form_label(form.firstName) }} 
             {{ form_widget(form.firstName) }}

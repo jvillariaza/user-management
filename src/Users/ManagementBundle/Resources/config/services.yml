@@ -7,9 +7,15 @@ parameters:
 #        arguments: [@service_id, "plain_value", %parameter%]
 services:
     
-    ## HELPERS
+    ## PASSWORD HASH HELPERS
     sha256salted_encoder:
         class: Users\ManagementBundle\Helper\Sha256SaltedHelper
+
+    ## SENDING OF EMAIL HELPERS
     service_emailer:
         class: Users\ManagementBundle\Helper\MailHelper
         arguments: [@mailer]
+
+    ## CONSTANTS
+    CONSTANTS:
+        class: Users\ManagementBundle\Helper\Constants

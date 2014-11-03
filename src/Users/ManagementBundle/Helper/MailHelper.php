@@ -19,7 +19,6 @@ class MailHelper
 
     public function sendWithSwiftMailer($subject, $mailto, $body) 
     {
-    	// mailer
 		$message = \Swift_Message::newInstance()
 				->setContentType(self::CONTENT_TYPE)
 				->setSubject($subject)

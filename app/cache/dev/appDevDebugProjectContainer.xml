@@ -2453,6 +2453,7 @@
     <service id="service_emailer" class="Users\ManagementBundle\Helper\MailHelper">
       <argument type="service" id="swiftmailer.mailer.default"/>
     </service>
+    <service id="constants" class="Users\ManagementBundle\Helper\Constants"/>
     <service id="web_profiler.controller.profiler" class="Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController">
       <argument type="service" id="router" on-invalid="null"/>
       <argument type="service" id="profiler" on-invalid="null"/>

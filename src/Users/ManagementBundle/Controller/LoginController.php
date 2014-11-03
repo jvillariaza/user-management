@@ -12,6 +12,7 @@ use Users\ManagementBundle\Entity\User;
 use Users\ManagementBundle\Entity\ChangePasswordRequests;
 use Users\ManagementBundle\Form\ForgotPasswordType;
 use Users\ManagementBundle\Form\PasswordType;
+use Users\ManagementBundle\Helper\Constants;
 
 class LoginController extends Controller
 {
@@ -64,7 +65,7 @@ class LoginController extends Controller
 
                 //check if email address provided exists
                 if (!$user) {
-                    $this->get('session')->getFlashBag()->add('alert-danger', 'Please use a registered email addres.');
+                    $this->get('session')->getFlashBag()->add('alert-danger', Constants::EMAIL_NOT_FOUND);
                     return $this->redirect($this->generateUrl('forgot_password'));
                 } else {
 
@@ -75,10 +76,10 @@ class LoginController extends Controller
                     $em->persist($ChangePasswordRequests);
                     $em->flush();
 
-                    $this->get('session')->getFlashBag()->add('alert-success', 'Please click the link sent to your mailbox for resetting the password. Thank you.');
+                    $this->get('session')->getFlashBag()->add('alert-success', Constants::EMAIL_SENT);
                     //sending of email
                     $mailBody = $this->renderView('UsersManagementBundle:Email:forgotPassword.html.twig', array('name' => $user->getFirstName(), 'confirmationLink' => $this->generateUrl('forgot_password_check', array('id' => $ChangePasswordRequests->getId(), 'uniqueKey' => $uniqueKey), true)));
-                    $this->get('service_emailer')->sendWithSwiftMailer("Forgot Password Request", $email, $mailBody);
+                    $this->get('service_emailer')->sendWithSwiftMailer(Constants::FORGOT_PASSWORD_SUBJECT, $email, $mailBody);
 
                     return $this->redirect($this->generateUrl('user_login'));
                 }
@@ -127,18 +128,18 @@ class LoginController extends Controller
                         $em->persist($passwordResetRequest);
                         $em->flush();
 
-                        $this->get('session')->getFlashBag()->add('alert-success', 'Successfully reset password.');
+                        $this->get('session')->getFlashBag()->add('alert-success', Constants::SUCCESSFUL_PASSWORD_RESET );
                         return $this->redirect($this->generateUrl('user_login'));
 
                     } else {
-                        $this->get('session')->getFlashBag()->add('alert-success', 'The URL that you are trying to access has expired. Please request a new one.');
+                        $this->get('session')->getFlashBag()->add('alert-success', '');
                         return $this->redirect($this->generateUrl('user_login'));
                     }
                 }
             }
         } 
         else {
-            $this->get('session')->getFlashBag()->add('alert-success', 'You have already changed your password. Please request a new one.');
+            $this->get('session')->getFlashBag()->add('alert-success', Constants::EXPIRED_URL);
             return $this->redirect($this->generateUrl('user_login'));
         }
         return $this->render('UsersManagementBundle:Account:resetPassword.html.twig', array('form' => $resetPasswordForm->createView()));
